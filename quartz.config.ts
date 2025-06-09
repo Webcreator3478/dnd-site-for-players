@@ -17,7 +17,9 @@ const config: QuartzConfig = {
     },
     locale: "en-US",
     baseUrl: "quartz.jzhao.xyz",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    // --- THIS IS THE CRUCIAL CHANGE: UPDATED ignorePatterns ---
+    ignorePatterns: ["private", "templates", ".obsidian", "Other but DM only", "The DM Private"],
+    // --------------------------------------------------------
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
@@ -66,6 +68,11 @@ const config: QuartzConfig = {
         },
         keepBackground: false,
       }),
+      // --- IMPORTANT: REMOVE Plugin.FilterContent FROM HERE ---
+      // The previous block for Plugin.FilterContent({ ... }) is now removed.
+      // It was causing the "TypeError: (void 0) is not a function" error.
+      // The exclusion is now handled by the 'ignorePatterns' in 'configuration'
+      // -------------------------------------------------------
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
@@ -73,6 +80,7 @@ const config: QuartzConfig = {
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
+    // Ensure FilterContent is not in filters array either if you put it there before
     filters: [Plugin.RemoveDrafts()],
     emitters: [
       Plugin.AliasRedirects(),
@@ -89,7 +97,7 @@ const config: QuartzConfig = {
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      // Plugin.CustomOgImages(),
     ],
   },
 }
