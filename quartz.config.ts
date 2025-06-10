@@ -16,7 +16,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
+    baseUrl: "/dnd-site-for-players",
     // --- THIS IS THE CRUCIAL CHANGE: UPDATED ignorePatterns ---
     ignorePatterns: ["private", "templates", ".obsidian", "Other but DM only", "The DM Private"],
     // --------------------------------------------------------
